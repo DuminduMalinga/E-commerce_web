@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h2>Your Cart</h2>
+
+    <p><strong>Items in Cart:</strong> <span id="cartCount">0</span></p>
+    <p><strong>Total:</strong> <span id="cartTotal">$0.00</span></p>
+
+    <a href="payment.html"><button>Proceed to Checkout</button></a>
+    <a href="index.html"><button>Continue Shopping</button></a>
+
+    <script>
+        // Load cart data from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || { count: 0, total: 0 };
+
+        // Display cart data on the page
+        document.getElementById('cartCount').innerText = cart.count;
+        document.getElementById('cartTotal').innerText = `$${cart.total.toFixed(2)}`;
+    </script>
+</body>
+</html>

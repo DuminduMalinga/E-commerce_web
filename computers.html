@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <title>Store</title>
+    <style>
+        
+        .product-item img {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease-in-out;
+            animation: fadeIn 1s forwards;
+        }
+    
+        .product-item:nth-child(1) img { animation-delay: 0.2s; }
+        .product-item:nth-child(2) img { animation-delay: 0.4s; }
+        .product-item:nth-child(3) img { animation-delay: 0.6s; }
+        .product-item:nth-child(4) img { animation-delay: 0.8s; }
+        .product-item:nth-child(5) img { animation-delay: 1s; }
+        .product-item:nth-child(6) img { animation-delay: 1.2s; }
+        .product-item:nth-child(7) img { animation-delay: 1.4s; }
+        .product-item:nth-child(8) img { animation-delay: 1.6s; }
+        .product-item:nth-child(9) img { animation-delay: 1.8s; }
+        .product-item:nth-child(10) img { animation-delay: 2s; }
+        .product-item:nth-child(11) img { animation-delay: 2.2s; }
+        .product-item:nth-child(12) img { animation-delay: 2.4s; }
+    
+    
+    
+    
+    
+       
+        .product-item img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="logo.jpg" alt="Virtusa Computers">
+        </div>
+        <div class="social-icons">
+            <div>
+                <img src="fb.jpg" alt="Facebook Icon">
+                <a href="http://www.facebook.com" style="text-decoration: none; color: inherit;">Facebook</a>
+            </div>
+            <div>
+                <img src="twitter.png" alt="Twitter Icon">
+                <a href="http://www.twitter.com" style="text-decoration: none; color: inherit;">Twitter</a>
+            </div>
+        </div>
+        <div class="hotline">
+            <div>
+                <img src="call.jpg" alt="Call Icon">
+                <p style="margin: 0; font-size: 14px;">Hotline: 066 1234567</p>
+            </div>
+            <div>
+    <img src="Home.png" alt="Home Icon" style="width: 30px; height: 30px;">
+    <input 
+    type="button" 
+    value="Home" 
+    style="margin-left: 10px; padding: 5px 10px; color: white; background-color: black; border: none; border-radius: 5px; cursor: pointer;" 
+    onclick="window.location.href='project.html';">
+
+</div>
+</div>
+</header>
+
+    <ul class="menu-bar">
+        <li><a href="laptop.html">Laptops</a></li>
+        <li><a href="computers.html">Computers</a></li>
+        <li><a href="mobile.html">Mobile Phones</a></li>
+        <li><a href="About_Us.html">About Us</a></li>
+    </ul>
+
+    <div class="main-content">
+        <h1>Welcome to Virtusa Computers</h1>
+        <p><b>Explore our wide range of products and services tailored to meet your needs.</b></p>
+        <input type="text" placeholder="Search Bar" style="height: 30px; width: 200px; position: absolute; right: 120px;">
+        <button type="button" style="height: 30px; width: 100px; position: absolute; right: 20px; background-color: #333; color: white; border: none; cursor: pointer; border-radius: 5px; font-size: 14px;">Search</button>
+        
+        <h2>Computers</h2>
+    </div>
+
+
+    
+    <div class="product-list">
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="computer1.jpg" alt="Laptop 1" width="150">
+                <p>$1,049</p>
+                <p>Computer 1</p>
+                <a href="computer1.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <br>
+                <img src="computer2.jpg" alt="Laptop 2" width="150">
+                <p>$2,132</p>
+                <p>Computer 2</p>
+                <br>
+                <a href="computer2.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer3.jpg" alt="Laptop 3" width="150">
+                <p>$339</p>
+                <p>Computer 3</p>
+                <a href="computer3.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer4.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 4</p>
+                <a href="computer4.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <br>
+                <img src="computer5.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 5</p>
+                <br>
+                <a href="computer5.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer6.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 6</p>
+                <a href="computer6.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer7.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 7</p>
+                <a href="computer7.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer8.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 8</p>
+                <a href="computer8.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer9.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 9</p>
+                <a href="computer9.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer10.jpg" alt="Laptop 4" width="150">
+                <p>$649</p>
+                <p>Computer 10</p>
+                <a href="computer10.html"><button>View Details</button></a>
+            </div>
+            <div class="product-item">
+                <img src="computer7.jpg" alt="Laptop 4" width="150">
+                <p>$949</p>
+                <p>Computer 11</p>
+                <a href="computer7.html"><button>View Details</button></a>
+            </div><div class="product-item">
+                <img src="computer7.jpg" alt="Laptop 4" width="150">
+                <p>809</p>
+                <p>Computer 12</p>
+                <a href="computer7.html"><button>View Details</button></a>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+   
+
+    <footer class="footer">
+        <section>
+            <img src="logo.jpg" width="100" height="100">
+            <p>
+                123 Main Street, Berheim<br>
+                State Province, Country
+            </p>
+        </section>
+        <section>
+            <h4>Categories</h4>
+            <ul class="vertical-list">
+                <li><a href="laptop.html">Laptops</a></li>
+                <li><a href="computers.html">Computers</a></li>
+                <li><a href="mobile.html">Mobile Phones</a></li>
+            </ul>
+        </section>
+    </footer>
+    
+    <div class="copyright">
+    <p class="left-align">Copyright © 2024. All rights reserved by Virtusa Technologies</p>
+    <div class="right-align">
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </div>
+
+</div>
+</body>
+</html>
