@@ -149,17 +149,6 @@ No build step, no server, and no dependencies are required.
 
 > **Note:** All images are served from the local `images/` folder. Make sure the `images/` and `images/products/` folders are present alongside the HTML files.
 
----
-
-## 📞 Contact
-
-**Virtusa Computers**  
-📍 123 Main Street, Berheim, State Province, Country  
-📞 Hotline: 066 1234567  
-✉️ info@virtusacomputers.com  
-🌐 [Facebook](https://facebook.com) · [Twitter](https://twitter.com)
-
----
 
 <div align="center">
 
