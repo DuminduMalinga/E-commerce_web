@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse Virtusa Computers product categories – Laptops, Desktop Computers, and Mobile Phones.">
+  <title id="page-title">Category – Virtusa Computers</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+<nav id="site-nav"></nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span id="breadcrumb-cat" class="current">Products</span>
+    </div>
+    <h1 id="cat-heading">All Products</h1>
+    <p id="cat-sub">Browse our full selection of premium tech products.</p>
+  </div>
+</div>
+
+<!-- Content Layout -->
+<div class="container section">
+  <div class="category-layout">
+
+    <!-- Sidebar Filter -->
+    <aside class="filter-sidebar">
+      <h3>🔧 Filters</h3>
+
+      <div class="filter-group">
+        <label class="filter-title">Price Range</label>
+        <div class="filter-option">
+          <input type="checkbox" id="f-under500" value="0-500" class="price-filter">
+          <label for="f-under500">Under $500</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-500-1000" value="500-1000" class="price-filter">
+          <label for="f-500-1000">$500 – $1,000</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-over1000" value="1000-99999" class="price-filter">
+          <label for="f-over1000">Over $1,000</label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-title">Badges</label>
+        <div class="filter-option">
+          <input type="checkbox" id="f-hotdeal" value="Hot Deal" class="badge-filter">
+          <label for="f-hotdeal">🔥 Hot Deal</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-new" value="New Arrival" class="badge-filter">
+          <label for="f-new">✨ New Arrival</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-value" value="Best Value" class="badge-filter">
+          <label for="f-value">💚 Best Value</label>
+        </div>
+      </div>
+
+      <button class="btn btn-ghost btn-full" id="clear-filters" style="margin-top:var(--space-4);">✕ Clear Filters</button>
+    </aside>
+
+    <!-- Main Area -->
+    <div>
+      <!-- Search + Results Bar -->
+      <div style="margin-bottom:var(--space-5); position:relative;">
+        <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);">🔍</span>
+        <input
+          type="text"
+          id="cat-search"
+          class="form-control"
+          style="padding-left:2.8rem; border-radius:var(--radius-full);"
+          placeholder="Search within this category..."
+        >
+      </div>
+
+      <div class="results-bar">
+        <span class="results-count" id="results-count">Loading products…</span>
+        <select class="sort-select" id="cat-sort">
+          <option value="default">Sort: Featured</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="name-asc">Name: A → Z</option>
+          <option value="rating-desc">Top Rated</option>
+          <option value="discount">Biggest Discount</option>
+        </select>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer id="site-footer"></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // ─── Category Page Logic ───────────────
+  const CAT_META = {
+    laptops:   { icon: '💻', label: 'Laptops',   sub: 'Discover ultrabooks, gaming laptops, 2-in-1s and more — from $339.' },
+    computers: { icon: '🖥️', label: 'Computers',  sub: 'From budget office desktops to ultimate gaming rigs — built for every need.' },
+    mobiles:   { icon: '📱', label: 'Mobiles',    sub: 'The latest flagship and mid-range smartphones from top brands.' },
+    all:       { icon: '🛍️', label: 'All Products', sub: 'Browse our complete catalogue of premium tech products.' },
+  };
+
+  const cat = (new URLSearchParams(window.location.search).get('cat') || 'all').toLowerCase();
+  const searchParam = new URLSearchParams(window.location.search).get('search') || '';
+  const meta = CAT_META[cat] || CAT_META.all;
+
+  // Set page meta
+  document.getElementById('page-title').textContent    = `${meta.label} – Virtusa Computers`;
+  document.getElementById('cat-heading').textContent   = `${meta.icon} ${meta.label}`;
+  document.getElementById('cat-sub').textContent       = meta.sub;
+  document.getElementById('breadcrumb-cat').textContent = meta.label;
+
+  renderHeader(meta.label);
+  renderFooter();
+
+  // Pre-fill search if coming from global search
+  if (searchParam) document.getElementById('cat-search').value = searchParam;
+
+  // ─── Filtering Engine ───────────────────
+  function applyFilters() {
+    let products = getProductsByCategory(cat === 'all' ? 'all' : cat);
+
+    // Text search
+    const q = document.getElementById('cat-search').value.toLowerCase().trim();
+    if (q) products = products.filter(p => p.name.toLowerCase().includes(q));
+
+    // Price checkboxes
+    const priceChecked = [...document.querySelectorAll('.price-filter:checked')].map(el => el.value);
+    if (priceChecked.length > 0) {
+      products = products.filter(p => priceChecked.some(range => {
+        const [min, max] = range.split('-').map(Number);
+        return p.price >= min && p.price <= max;
+      }));
+    }
+
+    // Badge checkboxes
+    const badgeChecked = [...document.querySelectorAll('.badge-filter:checked')].map(el => el.value);
+    if (badgeChecked.length > 0) {
+      products = products.filter(p => p.badge && badgeChecked.includes(p.badge));
+    }
+
+    // Sort
+    const sort = document.getElementById('cat-sort').value;
+    if (sort === 'price-asc')   products.sort((a,b) => a.price - b.price);
+    if (sort === 'price-desc')  products.sort((a,b) => b.price - a.price);
+    if (sort === 'name-asc')    products.sort((a,b) => a.name.localeCompare(b.name));
+    if (sort === 'rating-desc') products.sort((a,b) => b.rating - a.rating);
+    if (sort === 'discount')    products.sort((a,b) => {
+      const da = a.originalPrice ? (a.originalPrice - a.price) / a.originalPrice : 0;
+      const db = b.originalPrice ? (b.originalPrice - b.price) / b.originalPrice : 0;
+      return db - da;
+    });
+
+    // Render
+    const grid = document.getElementById('products-grid');
+    document.getElementById('results-count').innerHTML =
+      `<strong>${products.length}</strong> products found`;
+
+    if (products.length === 0) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">🔍</div>
+        <h3>No products found</h3>
+        <p>Try adjusting your filters or search term.</p>
+        <button class="btn btn-outline" onclick="document.getElementById('clear-filters').click()">Clear Filters</button>
+      </div>`;
+    } else {
+      grid.innerHTML = products.map((p, i) => renderProductCard(p, true, i * 0.05)).join('');
+    }
+  }
+
+  // Event listeners
+  document.getElementById('cat-search').addEventListener('input', applyFilters);
+  document.getElementById('cat-sort').addEventListener('change', applyFilters);
+  document.querySelectorAll('.price-filter, .badge-filter').forEach(el =>
+    el.addEventListener('change', applyFilters)
+  );
+  document.getElementById('clear-filters').addEventListener('click', () => {
+    document.querySelectorAll('.price-filter, .badge-filter').forEach(el => el.checked = false);
+    document.getElementById('cat-search').value = '';
+    document.getElementById('cat-sort').value = 'default';
+    applyFilters();
+  });
+
+  // Initial render
+  applyFilters();
+</script>
+</body>
+</html>

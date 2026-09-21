@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" id="meta-desc" content="Product details – Virtusa Computers">
+  <title id="page-title">Product – Virtusa Computers</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+<nav id="site-nav"></nav>
+
+<!-- Not-found state (hidden by default) -->
+<div id="not-found" class="container section hidden">
+  <div class="empty-state">
+    <div class="empty-icon">😕</div>
+    <h3>Product Not Found</h3>
+    <p>We couldn't find the product you're looking for.</p>
+    <a href="store.html" class="btn btn-primary">Back to Store</a>
+  </div>
+</div>
+
+<!-- Product Detail (hidden until loaded) -->
+<div id="product-page" class="hidden">
+
+  <!-- Breadcrumb -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="#" id="cat-breadcrumb">Category</a>
+        <span class="sep">›</span>
+        <span class="current" id="name-breadcrumb">Product</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="product-detail-layout">
+
+      <!-- Image Gallery -->
+      <div class="product-img-gallery">
+        <div class="product-img-main">
+          <img id="product-img" src="" alt="">
+        </div>
+        <div class="product-badge-row" id="product-badge-row"></div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="product-info">
+        <div id="product-badges-top" style="margin-bottom:var(--space-4); display:flex; gap:var(--space-2);"></div>
+        <h1 class="product-name" id="product-name"></h1>
+
+        <div class="product-price-row">
+          <div class="product-price" id="product-price"></div>
+          <div class="product-price-original" id="product-orig-price" style="display:none;"></div>
+          <div class="product-price-save" id="product-save" style="display:none;"></div>
+        </div>
+
+        <p class="product-desc" id="product-desc"></p>
+
+        <!-- Specs Table -->
+        <div class="specs-table">
+          <div class="specs-table-header">📋 Specifications</div>
+          <div id="specs-body"></div>
+        </div>
+
+        <!-- Add to Cart -->
+        <div class="product-add-row">
+          <div class="qty-control">
+            <button onclick="changeQty(-1)">−</button>
+            <span class="qty-val" id="qty-display">1</span>
+            <button onclick="changeQty(1)">+</button>
+          </div>
+          <button class="btn btn-primary btn-lg" id="add-cart-btn" style="flex:1;">
+            🛒 Add to Cart
+          </button>
+          <button class="btn btn-ghost btn-lg btn-icon" id="wishlist-btn" title="Add to Wishlist">♡</button>
+        </div>
+
+        <div class="flex" style="gap:var(--space-3); margin-bottom:var(--space-6);">
+          <a href="#" id="back-link" class="btn btn-ghost" style="flex:1;">← Back to Category</a>
+          <a href="cart.html" class="btn btn-secondary" style="flex:1;">View Cart 🛒</a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="flex" style="gap:var(--space-5); padding-top:var(--space-5); border-top:1px solid var(--border-color); flex-wrap:wrap;">
+          <div class="flex gap-2" style="font-size:var(--text-sm); color:var(--text-muted); align-items:center;">
+            <span>🔒</span> Secure Checkout
+          </div>
+          <div class="flex gap-2" style="font-size:var(--text-sm); color:var(--text-muted); align-items:center;">
+            <span>🚚</span> Free Delivery over $499
+          </div>
+          <div class="flex gap-2" style="font-size:var(--text-sm); color:var(--text-muted); align-items:center;">
+            <span>↩️</span> 30-Day Returns
+          </div>
+          <div class="flex gap-2" style="font-size:var(--text-sm); color:var(--text-muted); align-items:center;">
+            <span>🛡️</span> 1-Year Warranty
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end detail layout -->
+
+    <!-- Related Products -->
+    <div class="related-section scroll-reveal">
+      <div class="section-header text-left" style="margin-bottom:var(--space-8);">
+        <span class="label">More Like This</span>
+        <h2>Related Products</h2>
+      </div>
+      <div class="products-grid" id="related-grid"></div>
+    </div>
+
+  </div><!-- end container -->
+</div><!-- end product-page -->
+
+<footer id="site-footer"></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  let qty = 1;
+  let currentProduct = null;
+
+  function changeQty(delta) {
+    qty = Math.max(1, Math.min(10, qty + delta));
+    document.getElementById('qty-display').textContent = qty;
+  }
+
+  // ─── Load Product ──────────────────────
+  const id = new URLSearchParams(window.location.search).get('id');
+  const product = id ? getProductById(id) : null;
+
+  if (!product) {
+    document.getElementById('not-found').classList.remove('hidden');
+  } else {
+    currentProduct = product;
+    document.getElementById('product-page').classList.remove('hidden');
+
+    // SEO
+    document.title = `${product.name} – Virtusa Computers`;
+    document.getElementById('meta-desc').content = product.description.slice(0, 160);
+
+    // Breadcrumb
+    const catLabel = { laptops: 'Laptops', computers: 'Computers', mobiles: 'Mobiles' }[product.category];
+    const catLink = document.getElementById('cat-breadcrumb');
+    catLink.textContent = catLabel;
+    catLink.href = `category.html?cat=${product.category}`;
+    document.getElementById('name-breadcrumb').textContent = product.name;
+
+    // Image
+    document.getElementById('product-img').src = product.image;
+    document.getElementById('product-img').alt = product.name;
+
+    // Name
+    document.getElementById('product-name').textContent = product.name;
+
+    // Badges
+    if (product.badge) {
+      document.getElementById('product-badges-top').innerHTML =
+        `<span class="badge ${product.badgeColor}">${product.badge}</span>`;
+    }
+
+    // Price
+    document.getElementById('product-price').textContent = `$${product.price.toLocaleString()}`;
+    if (product.originalPrice) {
+      const save = Math.round((1 - product.price / product.originalPrice) * 100);
+      document.getElementById('product-orig-price').textContent = `$${product.originalPrice.toLocaleString()}`;
+      document.getElementById('product-orig-price').style.display = '';
+      document.getElementById('product-save').textContent = `Save ${save}%`;
+      document.getElementById('product-save').style.display = '';
+    }
+
+    // Description
+    document.getElementById('product-desc').textContent = product.description;
+
+    // Specs
+    document.getElementById('specs-body').innerHTML = Object.entries(product.specs).map(([k, v]) => `
+      <div class="specs-row">
+        <div class="spec-label">${k}</div>
+        <div class="spec-value">${v}</div>
+      </div>
+    `).join('');
+
+    // Back link
+    document.getElementById('back-link').href = `category.html?cat=${product.category}`;
+
+    // Add to cart button
+    document.getElementById('add-cart-btn').addEventListener('click', () => {
+      addToCart(product.id, qty);
+    });
+
+    // Wishlist
+    document.getElementById('wishlist-btn').addEventListener('click', () => {
+      showToast('Added to wishlist! ♡', 'info');
+    });
+
+    // Related Products
+    const related = getRelatedProducts(product.id, product.category, 4);
+    document.getElementById('related-grid').innerHTML =
+      related.map((p, i) => renderProductCard(p, true, i * 0.1)).join('');
+  }
+</script>
+</body>
+</html>

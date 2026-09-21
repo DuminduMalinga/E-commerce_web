@@ -1,26 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your shopping cart – Virtusa Computers">
+  <title>Cart – Virtusa Computers</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <h2>Your Cart</h2>
 
-    <p><strong>Items in Cart:</strong> <span id="cartCount">0</span></p>
-    <p><strong>Total:</strong> <span id="cartTotal">$0.00</span></p>
+<header id="site-header"></header>
+<nav id="site-nav"></nav>
 
-    <a href="payment.html"><button>Proceed to Checkout</button></a>
-    <a href="index.html"><button>Continue Shopping</button></a>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Shopping Cart</span>
+    </div>
+    <h1>🛒 Shopping Cart</h1>
+    <p id="cart-subtitle">Your selected items are shown below.</p>
+  </div>
+</div>
 
-    <script>
-        // Load cart data from localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || { count: 0, total: 0 };
+<div class="container section">
 
-        // Display cart data on the page
-        document.getElementById('cartCount').innerText = cart.count;
-        document.getElementById('cartTotal').innerText = `$${cart.total.toFixed(2)}`;
-    </script>
+  <!-- Empty State -->
+  <div id="cart-empty" class="empty-state hidden">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Looks like you haven't added anything yet. Browse our products and find something you love!</p>
+    <a href="store.html" class="btn btn-primary btn-lg">Start Shopping</a>
+  </div>
+
+  <!-- Cart Content -->
+  <div id="cart-content" class="cart-layout hidden">
+
+    <div>
+      <div class="cart-table">
+        <div class="cart-table-header">
+          <span>Product</span>
+          <span>Price</span>
+          <span>Quantity</span>
+          <span>Subtotal</span>
+          <span></span>
+        </div>
+        <div id="cart-items-body">
+          <!-- Items rendered by JS -->
+        </div>
+      </div>
+
+      <div style="display:flex; gap:var(--space-4); margin-top:var(--space-5); flex-wrap:wrap;">
+        <a href="store.html" class="btn btn-ghost">← Continue Shopping</a>
+        <button class="btn btn-danger" id="clear-cart-btn">🗑️ Clear Cart</button>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="summary-subtotal">$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span id="summary-shipping">Free</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax (8%)</span>
+        <span id="summary-tax">$0.00</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span class="val" id="summary-total">$0.00</span>
+      </div>
+
+      <div class="promo-row" style="margin-top:var(--space-5);">
+        <input type="text" id="promo-input" placeholder="Promo code">
+        <button class="btn btn-ghost btn-sm" onclick="applyPromo()">Apply</button>
+      </div>
+
+      <a href="checkout.html" class="btn btn-primary btn-full btn-lg" id="checkout-btn">
+        Proceed to Checkout →
+      </a>
+
+      <div class="secure-badge">🔒 Secured by SSL Encryption</div>
+    </div>
+  </div>
+
+</div>
+
+<footer id="site-footer"></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader('cart');
+  renderFooter();
+
+  function renderCart() {
+    const cart = getCart();
+    const emptyEl   = document.getElementById('cart-empty');
+    const contentEl = document.getElementById('cart-content');
+
+    if (cart.length === 0) {
+      emptyEl.classList.remove('hidden');
+      contentEl.classList.add('hidden');
+      document.getElementById('cart-subtitle').textContent = 'Your cart is empty.';
+      return;
+    }
+
+    emptyEl.classList.add('hidden');
+    contentEl.classList.remove('hidden');
+
+    const total = getCartTotal();
+    const tax   = total * 0.08;
+    const shipping = total >= 499 ? 0 : 19.99;
+    const grand = total + tax + shipping;
+
+    document.getElementById('cart-subtitle').textContent =
+      `You have ${cart.length} item${cart.length > 1 ? 's' : ''} in your cart.`;
+
+    // Render items
+    document.getElementById('cart-items-body').innerHTML = cart.map(item => `
+      <div class="cart-item" id="cart-item-${item.id}">
+        <div class="cart-item-product">
+          <img class="cart-item-img" src="${item.image}" alt="${escapeHTML(item.name)}"
+               onerror="this.src='logo.jpg'">
+          <div class="cart-item-info">
+            <div class="item-name">${escapeHTML(item.name)}</div>
+            <div class="item-cat">${escapeHTML(item.category)}</div>
+          </div>
+        </div>
+        <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+        <div class="qty-control">
+          <button onclick="changeItemQty('${item.id}', ${item.qty - 1})">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button onclick="changeItemQty('${item.id}', ${item.qty + 1})">+</button>
+        </div>
+        <div class="cart-item-subtotal">$${(item.price * item.qty).toLocaleString(undefined, {minimumFractionDigits:2})}</div>
+        <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Remove">✕</button>
+      </div>
+    `).join('');
+
+    // Update summary
+    document.getElementById('summary-subtotal').textContent =
+      `$${total.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+    document.getElementById('summary-shipping').textContent =
+      shipping === 0 ? '🎉 Free' : `$${shipping.toFixed(2)}`;
+    document.getElementById('summary-tax').textContent =
+      `$${tax.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+    document.getElementById('summary-total').textContent =
+      `$${grand.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+  }
+
+  function changeItemQty(id, newQty) {
+    if (newQty < 1) { removeItem(id); return; }
+    updateCartQty(id, newQty);
+    renderCart();
+  }
+
+  function removeItem(id) {
+    removeFromCart(id);
+    renderCart();
+    showToast('Item removed from cart.', 'info');
+  }
+
+  function applyPromo() {
+    const code = document.getElementById('promo-input').value.trim().toUpperCase();
+    if (code === 'VIRTUSA10') {
+      showToast('✅ Promo code applied! 10% off.', 'success');
+    } else {
+      showToast('❌ Invalid promo code.', 'error');
+    }
+  }
+
+  document.getElementById('clear-cart-btn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear your cart?')) {
+      clearCart();
+      renderCart();
+      showToast('Cart cleared.', 'info');
+    }
+  });
+
+  // Listen for cart updates from other tabs
+  document.addEventListener('cartUpdated', renderCart);
+
+  renderCart();
+</script>
 </body>
 </html>

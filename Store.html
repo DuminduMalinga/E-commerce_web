@@ -1,161 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="style_store.css">
-    <title>Store</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Virtusa Computers Store – Browse Hot Deals, New Arrivals, and Offers on laptops, computers, and mobile phones.">
+  <title>Store – Virtusa Computers</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <header>
-        <div>
-            <img src="logo.jpg" alt="Virtusa Computers">
-        </div>
-        <div class="social-icons">
-            <div>
-                <img src="fb.jpg" alt="Facebook Icon">
-                <a href="http://www.facebook.com" style="text-decoration: none; color: inherit;">Facebook</a>
-            </div>
-            <div>
-                <img src="twitter.png" alt="Twitter Icon">
-                <a href="http://www.twitter.com" style="text-decoration: none; color: inherit;">Twitter</a>
-            </div>
-        </div>
-        <div class="hotline">
-            <div>
-                <img src="call.jpg" alt="Call Icon">
-                <p style="margin: 0; font-size: 14px;">Hotline: 066 1234567</p>
-            </div>
-            <div>
-                <img src="Home.png" alt="Home Icon" style="width: 30px; height: 30px;">
-                <input 
-                    type="button" 
-                    value="Home" 
-                    style="margin-left: 10px; padding: 5px 10px; color: white; background-color: black; border: none; border-radius: 5px; cursor: pointer;" 
-                    onclick="window.location.href='project.html';">
-            </div>
-        </div>
-    </header>
 
-    <ul class="menu-bar">
-        <li><a href="laptop.html">Laptops</a></li>
-        <li><a href="computers.html">Computers</a></li>
-        <li><a href="mobile.html">Mobile Phones</a></li>
-        <li><a href="About_Us.html">About Us</a></li>
-    </ul>
+<header id="site-header"></header>
+<nav id="site-nav"></nav>
 
-    <div class="main-content">
-        <h1>Welcome to Virtusa Computers</h1>
-        <p><b>Explore our wide range of products and services tailored to meet your needs.</b></p>
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Store</span>
     </div>
+    <h1>🏪 Our Store</h1>
+    <p>Browse our curated selection of hot deals, new arrivals, and special offers — updated weekly.</p>
+  </div>
+</div>
 
-    <h2>Welcome to Our Store</h2>
-    
-    <input type="text" placeholder="Search Bar" style="height: 30px; width: 200px; position: absolute; right: 120px;">
-    <button type="button" style="height: 30px; width: 100px; position: absolute; right: 20px; background-color: #333; color: white; border: none; cursor: pointer; border-radius: 5px; font-size: 14px;">Search</button>
+<!-- Main Content -->
+<div class="container section">
 
-        <div class="new-content">
-        <h2 style="text-align: left;">Hot Deals</h2>
-        <div style="display: flex; gap: 15px; justify-content: left;">
-            <div>
-                <a href="#"><img src="laptop1.jpg" alt="Laptop 1" width="150" height="150"></a>
-                <h4><a href="laptop1.html">Laptop 1 </a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="computer1.jpg" alt="Computer 1" width="150" height="150"></a>
-                <h4><a href="computer1.html">Computer 1</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="mobile1.jpg" alt="Mobile 1" width="150" height="150"></a>
-                <h4><a href="mobile1.html">Mobile 1</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="laptop4.jpg" alt="Laptop 4" width="150" height="150"></a>
-                <h4><a href="laptop4.html">Laptop 4</a></h4>
-            </div>
-           
-        </div>
-        <br>
-        <h2 style="text-align: left;">New Arrivals</h2>
-        <div style="display: flex; gap: 15px; justify-content: left;">
-            <div>
-                <a href="#"><img src="laptop2.jpg" alt="Laptop 2" width="150" height="150"></a>
-                <h4><a href="laptop2.html">Laptop 2</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="computer2.jpg" alt="Computer 2" width="150" height="150"></a>
-                <h4><a href="computer2.html">Computer 2</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="mobile2.jpg" alt="Mobile 2" width="150" height="150"></a>
-                <h4><a href="mobile2.html">Mobile 2</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="laptop5.jpg" alt="Laptop 5" width="150" height="150"></a>
-                <h4><a href="laptop5.jpg">Laptop 5</a></h4>
-            </div>
-           
-        </div>
-        <br>
-        <h2 style="text-align: left;">Offers</h2>
-        <div style="display: flex; gap: 15px; justify-content: left;">
-            <div>
-                <a href="#"><img src="laptop3.jpg" alt="Laptop 3" width="150" height="150"></a>
-                <h4><a href="laptop3.html">Laptop 3</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="computer3.jpg" alt="Computer 3" width="150" height="150"></a>
-                <h4><a href="computer3.html">Computer 3</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="mobile3.jpg" alt="Mobile 3" width="150" height="150"></a>
-                <h4><a href="mobile3.html">Mobile 3</a></h4>
-            </div>
-            <div>
-                <a href="#"><img src="mobile7.jpg" alt="mobile 7" width="150" height="150"></a>
-                <h4><a href="mobile7.html">Mobile 4</a></h4>
-            </div>
-            
-        </div>
+  <!-- Search Bar -->
+  <div style="position:relative; max-width: 600px; margin: 0 auto var(--space-12);">
+    <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1.1rem;pointer-events:none;">🔍</span>
+    <input
+      type="text"
+      id="store-search"
+      class="form-control"
+      style="padding-left: 2.8rem; border-radius: var(--radius-full); font-size: var(--text-base);"
+      placeholder="Search products..."
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- Quick Category Filters -->
+  <div style="display:flex; gap:var(--space-3); justify-content:center; margin-bottom:var(--space-12); flex-wrap:wrap;">
+    <button class="btn btn-primary" data-cat="all" id="filter-all">All Products</button>
+    <button class="btn btn-ghost" data-cat="laptops" id="filter-laptops">💻 Laptops</button>
+    <button class="btn btn-ghost" data-cat="computers" id="filter-computers">🖥️ Computers</button>
+    <button class="btn btn-ghost" data-cat="mobiles" id="filter-mobiles">📱 Mobiles</button>
+  </div>
+
+  <!-- Hot Deals -->
+  <div class="store-section" id="hot-deals-section">
+    <div class="store-section-header">
+      <div class="title-wrap">
+        <div class="title-icon" style="background:rgba(245,158,11,0.15);">🔥</div>
+        <h2>Hot Deals</h2>
+      </div>
+      <a href="category.html?cat=all" class="btn btn-ghost btn-sm">View All →</a>
     </div>
-    
-    
+    <div class="products-row" id="hot-deals-grid"></div>
+  </div>
 
+  <div class="divider"></div>
 
-    <footer class="footer">
-        <section>
-            <img src="logo.jpg" width="100" height="100" alt="Virtusa Computers Logo">
-            <p>
-                123 Main Street, Berheim<br>
-                State Province, Country
-            </p>
-        </section>
-
-        <section>
-            <h4>About Us</h4>
-            <div class="short-about">
-                <p>Welcome to Virtusa Computers! Since 2022, we’ve been a trusted provider of top-quality tech products and services, including laptops, desktops, gaming PCs, accessories, and repairs. With expert guidance and innovative brands, we prioritize customer satisfaction through competitive prices and personalized support. Visit us for all your technology needs!</p>
-            </div>
-        </section>
-
-        <section>
-            <h4>Categories</h4>
-            <ul class="vertical-list">
-                <li><a href="laptop.html">Laptops</a></li>
-                <li><a href="computers.html">Computers</a></li>
-                <li><a href="mobile.html">Mobile Phones</a></li>
-            </ul>
-        </section>
-    </footer>
-
-    <div class="copyright">
-        <p class="left-align">Copyright © 2024. All rights reserved by Virtusa Technologies</p>
-        <div class="right-align">
-            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-        </div>
+  <!-- New Arrivals -->
+  <div class="store-section" id="new-arrivals-section">
+    <div class="store-section-header">
+      <div class="title-wrap">
+        <div class="title-icon" style="background:rgba(0,212,255,0.15);">✨</div>
+        <h2>New Arrivals</h2>
+      </div>
+      <a href="category.html?cat=all" class="btn btn-ghost btn-sm">View All →</a>
     </div>
-    
+    <div class="products-row" id="new-arrivals-grid"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- All Products / Filtered Results -->
+  <div class="store-section" id="all-products-section">
+    <div class="store-section-header">
+      <div class="title-wrap">
+        <div class="title-icon" style="background:rgba(124,58,237,0.15);">🛍️</div>
+        <h2 id="all-products-title">All Products</h2>
+      </div>
+      <div style="display:flex;gap:var(--space-3);align-items:center;">
+        <span id="results-count-store" style="font-size:var(--text-sm);color:var(--text-muted);"></span>
+        <select class="sort-select" id="store-sort">
+          <option value="default">Sort: Featured</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="name-asc">Name: A → Z</option>
+          <option value="rating-desc">Top Rated</option>
+          <option value="discount">Biggest Discount</option>
+        </select>
+      </div>
+    </div>
+    <div class="products-grid" id="all-products-grid"></div>
+  </div>
+
+</div>
+
+<footer id="site-footer"></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader('store');
+  renderFooter();
+
+  // ─── Hot Deals ─────────────────────────────────────
+  const hotDeals = getHotDeals();
+  document.getElementById('hot-deals-grid').innerHTML =
+    hotDeals.length
+      ? hotDeals.map((p, i) => renderProductCard(p, true, i * 0.08)).join('')
+      : '<p style="color:var(--text-muted)">No hot deals right now.</p>';
+
+  // ─── New Arrivals ───────────────────────────────────
+  const newArrivals = getNewArrivals();
+  document.getElementById('new-arrivals-grid').innerHTML =
+    newArrivals.length
+      ? newArrivals.map((p, i) => renderProductCard(p, true, i * 0.08)).join('')
+      : '<p style="color:var(--text-muted)">No new arrivals right now.</p>';
+
+  // ─── All Products ───────────────────────────────────
+  let activeCategory = 'all';
+  let currentProducts = [...PRODUCTS];
+
+  function applyStoreFilters() {
+    const q = document.getElementById('store-search').value.toLowerCase().trim();
+    const sort = document.getElementById('store-sort').value;
+
+    let results = activeCategory === 'all'
+      ? [...PRODUCTS]
+      : PRODUCTS.filter(p => p.category === activeCategory);
+
+    if (q) {
+      results = results.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    }
+
+    if (sort === 'price-asc')   results.sort((a,b) => a.price - b.price);
+    if (sort === 'price-desc')  results.sort((a,b) => b.price - a.price);
+    if (sort === 'name-asc')    results.sort((a,b) => a.name.localeCompare(b.name));
+    if (sort === 'rating-desc') results.sort((a,b) => b.rating - a.rating);
+    if (sort === 'discount')    results.sort((a,b) => {
+      const da = a.originalPrice ? (a.originalPrice - a.price) / a.originalPrice : 0;
+      const db = b.originalPrice ? (b.originalPrice - b.price) / b.originalPrice : 0;
+      return db - da;
+    });
+
+    currentProducts = results;
+    renderAllGrid();
+  }
+
+  function renderAllGrid() {
+    const grid = document.getElementById('all-products-grid');
+    const count = currentProducts.length;
+    document.getElementById('results-count-store').textContent = `${count} product${count !== 1 ? 's' : ''}`;
+
+    const catNames = { all:'All Products', laptops:'💻 Laptops', computers:'🖥️ Computers', mobiles:'📱 Mobiles' };
+    const q = document.getElementById('store-search').value.trim();
+    document.getElementById('all-products-title').textContent =
+      q ? `Search: "${q}"` : catNames[activeCategory];
+
+    if (count === 0) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">🔍</div>
+        <h3>No products found</h3>
+        <p>Try a different search term or category.</p>
+      </div>`;
+    } else {
+      grid.innerHTML = currentProducts.map((p, i) => renderProductCard(p, true, i * 0.04)).join('');
+    }
+  }
+
+  // Category filter buttons
+  document.querySelectorAll('[data-cat]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCategory = btn.dataset.cat;
+      // Update button styles
+      document.querySelectorAll('[data-cat]').forEach(b => {
+        b.className = b.dataset.cat === activeCategory ? 'btn btn-primary' : 'btn btn-ghost';
+      });
+      applyStoreFilters();
+    });
+  });
+
+  document.getElementById('store-search').addEventListener('input', applyStoreFilters);
+  document.getElementById('store-sort').addEventListener('change', applyStoreFilters);
+
+  // Initial render
+  applyStoreFilters();
+</script>
 </body>
 </html>
