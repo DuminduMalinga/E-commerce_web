@@ -22,7 +22,7 @@ function renderHeader(activePage = '') {
   document.getElementById('site-header').innerHTML = `
     <div class="header-inner">
       <a href="index.html" class="header-logo">
-        <img src="logo.jpg" alt="Virtusa Computers Logo">
+        <img src="images/logo.jpg" alt="Virtusa Computers Logo">
         <div class="logo-text">
           <span class="text-gradient">Virtusa</span>
           <span>Computers</span>
@@ -43,10 +43,10 @@ function renderHeader(activePage = '') {
       <div class="header-right">
         <div class="header-social">
           <a href="https://facebook.com" target="_blank" rel="noopener">
-            <img src="fb.jpg" alt="Facebook"> Facebook
+            <img src="images/fb.jpg" alt="Facebook"> Facebook
           </a>
           <a href="https://twitter.com" target="_blank" rel="noopener">
-            <img src="twitter.png" alt="Twitter"> Twitter
+            <img src="images/twitter.png" alt="Twitter"> Twitter
           </a>
         </div>
         <div class="header-hotline">📞 <span>066 1234567</span></div>
@@ -101,7 +101,7 @@ function renderFooter() {
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
-          <img src="logo.jpg" alt="Virtusa Computers">
+          <img src="images/logo.jpg" alt="Virtusa Computers">
           <span class="footer-logo-text text-gradient">Virtusa Computers</span>
         </a>
         <p>Your trusted technology partner since 2022. We provide top-quality laptops, desktops, gaming PCs, mobile phones, accessories, and expert repair services.</p>
